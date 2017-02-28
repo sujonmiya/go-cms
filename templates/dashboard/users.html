@@ -1,0 +1,65 @@
+{{template "header"}}
+{{template "sidebar" .CurrentUser}}
+
+<md-content flex layout-padding>
+    <h1>Users</h1>
+    <hr/>
+
+    <div ng-controller="UsersCtrl" ng-cloak>
+        <md-button class="md-raised" ng-click="newUser($event)">New User</md-button>
+
+        <md-virtual-repeat-container id="vertical-container">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>
+                        <md-checkbox title="Select all Users" ng-model="isChecked" aria-label="Select All"></md-checkbox>
+                    </th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Website</th>
+                    <th>Role</th>
+                    <th>Created By</th>
+                    <th>Pages</th>
+                    <th>Articles</th>
+                    <th>Categories</th>
+                    <th>Tags</th>
+                    <th>Created At</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{range .Users}}
+                <tr>
+                    <td>
+                        <md-checkbox title="Select {{.FullName}}" aria-label="Select"></md-checkbox>
+                    </td>
+                    <td>{{.ID}}</td>
+                    <td>
+                        <p>
+                            <a href="/dashboard/users/{{.ID}}/?task=edit&sig={{$.Signature}}" title="{{.FullName}}">{{.FullName}}</a><br/>
+                            <small><em>Alias: {{.NickName}}</em></small>
+                        </p>
+                        <p>
+                            <a href="/dashboard/users/{{.ID}}/?task=edit&sig={{$.Signature}}" title="Edit {{.FullName}}">Edit</a> |
+                            <a href="/dashboard/users/{{.ID}}/?task=trash&sig={{$.Signature}}" title="Trash {{.FullName}}">Trash</a>
+                        </p>
+                    </td>
+                    <td><a href="mailto:{{.Email}}">{{.Email}}</a></td>
+                    <td><a href="{{.Website}}" target="_blank">{{.Website}}</a></td>
+                    <td>{{.Role.Name}}</td>
+                    <td>{{.CreatedBy.FullName}}</td>
+                    <td>{{.NumPages}}</td>
+                    <td>{{.NumArticles}}</td>
+                    <td>{{.NumCategories}}</td>
+                    <td>{{.NumTaxonomies}}</td>
+                    <td>{{.CreatedAt}}</td>
+                </tr>
+                {{end}}
+                </tbody>
+            </table>
+        </md-virtual-repeat-container>
+    </div>
+</md-content>
+
+{{template "footer"}}

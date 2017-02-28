@@ -1,0 +1,15 @@
+{{template "header" .}}
+{{template "sidebar" .}}
+
+<md-content flex layout-padding>
+    Page<br/>
+    Title: {{.Page.Title}}<br/>
+    Content: {{.Page.Content}}<br/>
+    Template: {{.Page.Template}}<br/>
+    AuthorName: {{.Page.AuthorName}}<br/>
+    LastEditorName: {{.Page.LastEditorName}}<br/>
+    Status: {{.Page.Status}}<br/>
+    UpdatedAt: {{.Page.UpdatedAt}}
+</md-content>
+
+{{template "footer"}}

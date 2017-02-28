@@ -1,0 +1,21 @@
+{{template "header" .}}
+{{template "sidebar" .}}
+
+<md-content flex layout-padding>
+    Category<br/>
+    Name:{{.Category.Name}}<br/>
+    Description:{{.Category.Description}}<br/><br/>
+    Articles<br/>
+    {{range .Category.Articles}}
+    Title:<a href="/article/{{.Slug}}" title="{{.Title}}">{{.Title}}</a><br/>
+    Content:{{.Content}}<br/>
+    UpdatedAt:{{.UpdatedAt}}<br/><br/>
+    Author<br/>
+    FullName:{{.Author.FullName}}<br/>
+    Website:{{.Author.Website}}<br/>
+    Bio:{{.Author.Bio}}<br/><br/>
+    <hr/>
+    {{end}}
+</md-content>
+
+{{template "footer"}}

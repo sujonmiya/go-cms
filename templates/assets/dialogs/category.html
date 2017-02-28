@@ -1,0 +1,39 @@
+<md-dialog aria-label="List dialog" ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>New Category</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="Close dialog">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content layout-padding>
+        <div layout="column">
+            <div layout="row">
+                <md-input-container>
+                    <label>Name</label>
+                    <input ng-model="category.Name">
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Parent</label>
+                    <md-select ng-model="category.Parent">
+                        <md-option ng-repeat="parent in categories" ng-value="parent.Id">[[parent.Name]]</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <md-input-container>
+                <label>Description</label>
+                <input ng-model="category.Description">
+            </md-input-container>
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="hide()" class="md-primary">Cancel</md-button>
+        <md-button ng-click="save(category)" class="md-primary md-raised">Save</md-button>
+    </md-dialog-actions>
+</md-dialog>

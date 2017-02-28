@@ -1,0 +1,68 @@
+<md-dialog aria-label="List dialog" ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Edit Article</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="Close dialog">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content layout-padding>
+        <div layout="row">
+            <div layout="column">
+                <md-input-container>
+                    <label>Title</label>
+                    <input ng-model="article.Title">
+                </md-input-container>
+
+                <label>Content</label>
+                <textarea name="content" id="content" rows="10" cols="80" ng-model="article.Content"></textarea>
+                <script>
+                    (function() {
+                        console.log(CKEDITOR);
+                        CKEDITOR.replace('content');
+                    })();
+                </script>
+
+                <md-virtual-repeat-container id="vertical-container">
+                    <md-list>
+                        <md-list-item md-virtual-repeat="category in categories">
+                            <md-checkbox>[[category.Name]]</md-checkbox>
+                        </md-list-item>
+                    </md-list>
+                </md-virtual-repeat-container>
+            </div>
+
+            <div layout="column">
+                <md-input-container>
+                    <label>Status</label>
+                    <md-select ng-model="article.Status">
+                        <md-option ng-repeat="status in statuses" ng-value="status">
+                            [[status]]
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Visibility</label>
+                    <md-select ng-model="article.Visibility">
+                        <md-option ng-repeat="visibility in visibilities" ngvalue="visibility">
+                            [[visibility]]
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <label>ScheduleAt</label>
+                <md-datepicker ng-model="article.ScheduleAt" md-placeholder="Enter date"></md-datepicker>
+            </div>
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="hide()" class="md-primary">Cancel</md-button>
+        <md-button ng-click="save(user)" class="md-primary md-raised">Save</md-button>
+    </md-dialog-actions>
+</md-dialog>

@@ -1,0 +1,52 @@
+{{define "footer"}}
+</section>
+<!--[if lt IE 9]>
+<script src="/assets/js/libs/es5-shim.min.js"></script>
+<![endif]-->
+<!--
+<script src="/assets/js/libs/angular.js"></script>
+<script src="/assets/js/libs/angular-route.js"></script>
+<script src="/assets/js/libs/angular-material.js"></script>
+<script src="/assets/js/libs/angular-cookies.js"></script>
+<script src="/assets/js/libs/underscore.js"></script>
+<script src="/assets/js/libs/angular-underscore.js"></script>
+<script src="/assets/js/libs/angular-base64.js"></script>
+<script src="/assets/js/libs/angular-cookies.js"></script>
+<script src="/assets/js/libs/ionic.bundle.js"></script>
+<script src="/assets/js/libs/ng-file-upload-shim.min.js"></script>
+<script src="/assets/js/libs/ng-file-upload.min.js"></script>
+<script src="/assets/js/script.js"></script>
+<script src="/assets/js/libs/angular-material-icons.min.js"></script>
+<script src="/assets/js/libs/angular-aria.js"></script>
+<script src="/assets/js/libs/toaster.js"></script>-->
+<script src="/assets/js/dist/libs/jquery-3.1.1.min.js"></script>
+<script src="/assets/js/dist/libs/dropify.min.js"></script>
+<script src="/assets/js/dist/libs/selectize.min.js"></script>
+<script src="/assets/js/dist/app.bundle.js"></script>
+<script>
+    (function() {
+        //console.log(CKEDITOR);
+        //CKEDITOR.replace('content');
+    })();
+
+    $(document).ready(function() {
+        var drEvent = $('.dropify').dropify({
+            allowedFileExtensions: ['png', 'jpg', 'jpeg', 'gif'],
+            maxFileSize: '2M',
+            height: 300
+        });
+
+        drEvent.on('dropify.beforeClear', function(event, element){
+            console.log(element);
+            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+        });
+        drEvent.on('dropify.afterClear', function(event, element){
+            console.log('File \"" + element.file.name + "\" deleted');
+        });
+    });
+
+    $('select').selectize({});
+</script>
+</body>
+</html>
+{{end}}

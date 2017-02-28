@@ -1,0 +1,21 @@
+{{template "header"}}
+{{template "sidebar" .CurrentUser}}
+
+<div layout-padding flex>
+    <h1>New Article</h1>
+    <hr/>
+
+    <div ng-controller="ArticleCtrl" ng-cloak layout-wrap>
+        <div layout="row">
+            {{template "article" .}}
+
+            <div flex layout-align="end start">
+                <md-input-container>
+                    <md-button ng-click="save(article)" class="md-primary md-raised">Save</md-button>
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{template "footer"}}

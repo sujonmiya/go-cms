@@ -1,0 +1,28 @@
+{{define "header"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>{{.Title}}</title>
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/angular-material.min.css">
+    <link rel="stylesheet" href="/assets/css/angular-material-icons.css">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/toaster.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/dropify.min.css">
+    <link rel="stylesheet" href="/assets/css/selectize.default.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
+
+    <script src="/assets/js/libs/ckeditor/ckeditor.js"></script>
+</head>
+<body ng-app="app">
+<header id="header" class="page-topbar">
+    <!-- start header nav-->
+
+    <!-- end header nav-->
+</header>
+<section layout="row" flex ng-cloak>
+    <toaster-container></toaster-container>
+{{end}}

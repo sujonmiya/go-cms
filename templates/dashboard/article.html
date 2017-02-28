@@ -1,0 +1,211 @@
+{{define "article"}}
+
+<div>
+    <form name="articleForm" method="post" action="/dashboard/articles/{{.Article.ID}}/">
+        <div style="float: left;">
+            <div layout="row">
+                <md-input-container style="width: 100%;">
+                    <label>Title</label>
+                    <input type="text" ng-model="article.title" name="title" ng-value="'{{.Article.Title}}'"/>
+                    <br/>
+                    <small><em>Alias: {{.Article.Slug}}</em></small>
+                </md-input-container>
+            </div>
+
+            <div layout="row">
+                <md-card>
+                    <md-card-header>
+                        <md-card-avatar>
+                            <md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>
+                        </md-card-avatar>
+                        <md-card-header-text>
+                            <span class="md-title">Content</span>
+                            <span class="md-subhead">subhead</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <textarea name="content" ng-model="article.content" id="editor1" rows="10" cols="100">{{.Article.Content}}</textarea>
+                        <script type="text/javascript">
+                            CKEDITOR.replace('editor1', {
+                                width: '750px',
+                                height: 350
+                            });
+                        </script>
+                    </md-card-content>
+                </md-card>
+            </div>
+
+            <div layout="row">
+                <md-card>
+                    <md-card-header>
+                        <md-card-avatar>
+                            <md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>
+                        </md-card-avatar>
+                        <md-card-header-text>
+                            <span class="md-title">Excerpt</span>
+                            <span class="md-subhead">subhead</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <md-input-container style="width: 100%;" class="md-block">
+                            <textarea name="excerpt" ng-model="article.excerpt" rows="5" cols="100">{{.Article.Excerpt}}</textarea>
+                        </md-input-container>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+
+        <div style="float: right;">
+            <div style="width: 350px;">
+                <md-card>
+                    <md-card-header>
+                        <md-card-avatar>
+                            <md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>
+                        </md-card-avatar>
+                        <md-card-header-text>
+                            <span class="md-title">Status</span>
+                            <span class="md-subhead">subhead</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <md-select placeholder="Status" ng-model="article.Status">
+                            {{range .Statuses}}
+                            <md-option value="{{.}}">{{.}}</md-option>
+                            {{end}}
+                        </md-select>
+                        <!--<md-datepicker ng-model="article.ScheduleAt" md-placeholder="Schedule At"></md-datepicker>
+
+                        <p>Last Edited- {{.Article.Editor.FullName}} <small>{{.Article.UpdatedAt}}</small></p>-->
+                        <md-button type="submit" style="margin-right: 0; float: right;" class="md-primary md-raised">Update</md-button>
+                    </md-card-content>
+                </md-card>
+            </div>
+
+            <div style="width: 350px;">
+                <md-card>
+                    <md-card-header>
+                        <md-card-avatar>
+                            <md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>
+                        </md-card-avatar>
+                        <md-card-header-text>
+                            <span class="md-title">Featured Image</span>
+                            <span class="md-subhead">{{.Article.FeaturedImage.Name}}</span>
+                        </md-card-header-text>
+                    </md-card-header>
+
+                    <img width="300" src="{{.Article.FeaturedImage.Url}}" class="md-card-image" alt="{{.Article.FeaturedImage.AltText}}">
+                    [[article | json]]
+                    <md-card-content>
+                        <md-input-container>
+                            <input type="file" ngf-select ng-model="file" name="featuredImage" id="featured-image" class="dropify" />
+                            <small><em>Allowed image formats: png, jpg/jpeg & gif</em></small>
+                        </md-input-container>
+                        <!--<p>Width- {{.Article.FeaturedImage.Width}}px</p>
+                        <p>Height- {{.Article.FeaturedImage.Height}}px</p>
+                        <p>Size- {{.Article.FeaturedImage.Size}}</p>-->
+                        <md-input-container>
+                            <label>Alt Text</label>
+                            <input type="text" ng-model="featuredImage.altText" value="{{.Article.FeaturedImage.AltText}}">
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Caption</label>
+                            <input type="text" ng-model="featuredImage.caption" value="{{.Article.FeaturedImage.Caption}}">
+                        </md-input-container>
+                    </md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button>Upload</md-button>
+                        <md-button ng-click="vm.trashFeaturedImage($event, '{{.Article.FeaturedImage.Name}}')">Trash</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+
+            <!--<div>
+                <md-card>
+                    <md-card-header>
+                        <md-card-avatar>
+                            <md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>
+                        </md-card-avatar>
+                        <md-card-header-text>
+                            <span class="md-title">Visibility</span>
+                            <span class="md-subhead">subhead</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <md-select flex-gt-sm placeholder="Status" ng-model="article.Status">
+                            <md-select flex placeholder="Visibility" ng-model="article.Visibility">
+                                {{range .Visibilities}}
+                                <md-option value="{{.}}">{{.}}</md-option>
+                                {{end}}
+                            </md-select>
+                        </md-select>
+                    </md-card-content>
+                </md-card>
+            </div>-->
+
+            <div style="width: 350px;">
+                <md-card>
+                    <md-card-header>
+                        <md-card-avatar>
+                            <md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>
+                        </md-card-avatar>
+                        <md-card-header-text>
+                            <span class="md-title">Categories</span>
+                            <span class="md-subhead">subhead</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <md-list>
+                            {{range .Article.Categories}}
+                            <md-list-item>
+                                <md-checkbox aria-label="{{.Name}}"></md-checkbox>{{.Name}}
+                            </md-list-item>
+                            {{end}}
+                        </md-list>
+                    </md-card-content>
+                </md-card>
+            </div>
+
+            <div style="width: 350px;">
+                <md-card>
+                    <md-card-header>
+                        <md-card-avatar>
+                            <md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>
+                        </md-card-avatar>
+                        <md-card-header-text>
+                            <span class="md-title">Tags</span>
+                            <span class="md-subhead">subhead</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <md-list>
+                            {{range .Article.Taxonomies}}
+                            <md-list-item>
+                                <md-checkbox aria-label="{{.Name}}"></md-checkbox>{{.Name}}
+                            </md-list-item>
+                            {{end}}
+                        </md-list>
+                    </md-card-content>
+                </md-card>
+            </div>
+
+            <div style="width: 350px;">
+                <md-card>
+                    <md-card-header>
+                        <md-card-avatar>
+                            <md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>
+                        </md-card-avatar>
+                        <md-card-header-text>
+                            <span class="md-title">Author</span>
+                            <span class="md-subhead">subhead</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <p>{{.Article.Author.FullName}} <small><em>authored {{.Article.CreatedAt}}</em></small></p>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+    </form>
+</div>
+
+{{end}}

@@ -1,0 +1,60 @@
+{{define "sidebar"}}
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+
+    <img width="320" src="/assets/images/icon-user-default.png" class="md-card-image">
+    <md-content>
+        <h2>Sujon Miya</h2>
+        <p>A passionate Blogger and Developer.</p>
+    </md-content>
+
+    <md-list>
+        <md-list-item>
+            <md-icon>pages</md-icon>
+            <a href="/dashboard/pages/">Pages</a>
+        </md-list-item>
+        <md-list-item>
+            <md-icon>book</md-icon>
+            <a href="/dashboard/articles/">Articles</a>
+        </md-list-item>
+        <md-list-item>
+            <md-icon>all_out</md-icon>
+            <a href="/dashboard/categories/">Categories</a>
+        </md-list-item>
+        <md-list-item>
+            <md-icon>book</md-icon>
+            <a href="/dashboard/tags/">Tags</a>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-list-item>
+            <md-icon>file</md-icon>
+            <a href="/dashboard/media-library/">Media Library</a>
+        </md-list-item>
+        <md-list-item>
+            <md-icon>book</md-icon>
+            <a href="/dashboard/sliders/">Sliders</a>
+        </md-list-item>
+        <md-list-item>
+            <md-icon>all_out</md-icon>
+            <a href="/dashboard/menus/">Menu</a>
+        </md-list-item>
+        <md-list-item>
+            <md-icon>people</md-icon>
+            <a href="/dashboard/users/">Users</a>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-list-item>
+            <md-icon>all_out</md-icon>
+            <a href="/dashboard/themes/">Themes</a>
+        </md-list-item>
+        <md-list-item>
+            <md-icon>settings</md-icon>
+            <a href="/dashboard/settings/">Settings</a>
+        </md-list-item>
+        <md-list-item>
+            <md-icon>help</md-icon>
+            <a href="/dashboard/help/">Help</a>
+        </md-list-item>
+    </md-list>
+    <div flex></div>
+</md-sidenav>
+{{end}}

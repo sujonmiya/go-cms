@@ -1,0 +1,9 @@
+{{template "header"}}
+{{template "sidebar" .CurrentUser}}
+
+<div layout-padding flex>
+<h1>404 Not found</h1>
+<hr/>
+{{.Error}}
+
+{{template "footer"}}

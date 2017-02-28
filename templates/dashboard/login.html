@@ -1,0 +1,30 @@
+{{template "header" .}}
+
+<div layout-align="center center">
+    <div ng-cloak>
+        <md-content layout-padding>
+            <h1>The CMS</h1>
+
+            <form id="loginForm" name="loginForm" action="/login" method="post">
+                <md-input-container class="md-block">
+                    <label>Email</label>
+                    <input required name="Email"
+                           ng-model="login.email">
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Password</label>
+                    <input required name="Password"
+                           ng-model="login.password">
+                </md-input-container>
+                <input type="hidden" name="CsrfToken" value="{{.CsrfToken}}">
+                <button type="submit">Login</button>
+            </form>
+
+            <p>New User?<a href="/sign-up">Sign Up</a></p>
+            <p><a href="/forgot-password">Forgot your password?</a></p>
+        </md-content>
+    </div>
+</div>
+
+{{template "footer"}}

@@ -1,0 +1,49 @@
+<md-dialog aria-label="List dialog" ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Create a new User</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="Close dialog">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content layout-padding>
+        <div layout="column">
+            <form name="userRegistrationForm">
+                <div layout="row">
+                    <md-input-container>
+                        <input placeholder="FirstName" ng-model="user.FirstName" required>
+                    </md-input-container>
+                    <md-input-container>
+                        <input placeholder="LastName" ng-model="user.LastName">
+                    </md-input-container>
+                </div>
+
+                <div layout="row">
+                    <md-input-container flex>
+                        <input type="email" placeholder="Email" ng-model="user.Email" required>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Role</label>
+                        <md-select ng-model="user.Role" required>
+                            <md-option ng-repeat="role in roles" value="[[role]]">[[role]]</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+                <md-input-container>
+                    <input type="password" placeholder="Password" ng-model="user.Password" required>
+                </md-input-container>
+            </form>
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="hide()" class="md-primary">Cancel</md-button>
+        <md-button ng-disabled="userRegistrationForm.$invalid" ng-click="save(user)" class="md-primary md-raised">Save</md-button>
+    </md-dialog-actions>
+</md-dialog>

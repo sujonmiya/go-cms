@@ -1,0 +1,7 @@
+name: default
+version: 0.1
+description: The default theme which comes with the CMS
+author:
+  name: Sujon Miya
+  website: http://sujon.me
+templates: [article, articles, page, category, tags]

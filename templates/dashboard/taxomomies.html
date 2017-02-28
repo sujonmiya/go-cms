@@ -1,0 +1,90 @@
+{{template "header"}}
+{{template "sidebar" .CurrentUser}}
+
+<md-content flex layout-padding>
+    <h1>Tags</h1>
+    <hr/>
+
+    <div ng-controller="CategoriesCtrl" ng-cloak>
+        <md-button class="md-raised" ng-click="newCategory($event)">New Tag</md-button>
+        <md-virtual-repeat-container id="vertical-container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            <md-checkbox title="Select all Categories" ng-model="isChecked" aria-label="Select All"></md-checkbox>
+                        </th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Parent</th>
+                        <th>Articles</th>
+                        <th>Author</th>
+                        <th>Last Edited</th>
+                        <th>Created At</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Taxonomies}}
+                    <tr>
+                        <td>
+                            <md-checkbox title="Select {{.Name}}" aria-label="Select"></md-checkbox>
+                        </td>
+                        <td>{{.ID}}</td>
+                        <td>
+                            <p>
+                                <a href="/dashboard/tags/{{.ID}}/?task=edit&sig={{$.Signature}}" title="{{.Name}}">
+                                    {{.Name}}
+                                </a><br/>
+                                <small><em>Alias: {{.Slug}}</em></small>
+                            </p>
+                            <p></p>
+                            <p>
+                                <a href="/dashboard/tags/{{.ID}}/?task=edit&sig={{$.Signature}}" title="Edit {{.Name}}">Edit</a> |
+                                <a href="/dashboard/tags/{{.ID}}/?task=delete&sig={{$.Signature}}" title="Trash {{.Name}}">Trash</a> |
+                                <a target="_blank" href="/tags/{{.Slug}}" title="View {{.Name}}">View</a>
+                            </p>
+                        </td>
+                        <td class="description">{{.Description}}</td>
+                        <td>{{.Parent.Name}}</td>
+                        <td><small><em>{{.NumArticles}}</em></small></td>
+                        <td>{{.AuthorName}}</td>
+                        <td>{{.LastEditorName}}<br/><small>{{.UpdatedAt}}</small></td>
+                        <td>{{.CreatedAt}}</td>
+                        <td>
+                            <md-menu md-position-mode="target-right target">
+                                <md-button class="md-icon-button"
+                                           aria-label="Open phone interactions menu"
+                                           ng-click="openMenu($mdOpenMenu, $event)">
+                                    <md-icon>more_vert</md-icon>
+                                </md-button>
+                                <md-menu-content width="3">
+                                    <md-menu-item>
+                                        <md-button ng-click="edit($event, category)">
+                                            <md-icon>edit</md-icon>Edit
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click="delete($event, category)">
+                                            <md-icon>delete</md-icon>Delete
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-divider></md-menu-divider>
+                                    <md-menu-item>
+                                        <md-button ng-click="toggleNotifications()">
+                                            <md-icon>more_horiz</md-icon>Others
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                        </td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </md-virtual-repeat-container>
+    </div>
+</md-content>
+
+{{template "footer"}}

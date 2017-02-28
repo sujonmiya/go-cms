@@ -1,0 +1,15 @@
+{{template "header"}}
+{{template "sidebar" .CurrentUser}}
+
+<div layout-padding flex>
+    <h1>Edit Page</h1>
+    <hr/>
+    <toaster-container></toaster-container>
+    <div layout-wrap>
+        <div layout="row">
+            {{template "page" .}}
+        </div>
+    </div>
+</div>
+
+{{template "footer"}}

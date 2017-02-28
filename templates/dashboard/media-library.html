@@ -1,0 +1,102 @@
+{{template "header"}}
+{{template "sidebar" .CurrentUser}}
+
+<div layout-padding flex>
+    <h1>Media Library</h1>
+    <hr/>
+
+    <div ng-controller="PicturesCtrl" ng-cloak layout-wrap>
+        <md-button class="md-raised" ng-href="?new">New Picture</md-button>
+        <div layout="row">
+            <md-input-container>
+                <md-select ng-model="someModel" placeholder="Categories">
+                    <md-option ng-value="opt" ng-repeat="opt in neighborhoods2">[[opt]]</md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container>
+                <md-select ng-model="someModel" placeholder="Tags">
+                    <md-option ng-value="opt" ng-repeat="opt in neighborhoods2">[[opt]]</md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container>
+                <md-select ng-model="someModel" placeholder="Author">
+                    <md-option ng-value="opt" ng-repeat="opt in neighborhoods2">[[opt]]</md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container>
+                <md-select ng-model="someModel" placeholder="Editor">
+                    <md-option ng-value="opt" ng-repeat="opt in neighborhoods2">[[opt]]</md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container>
+                <md-select ng-model="someModel" placeholder="Status">
+                    <md-option ng-value="opt" ng-repeat="opt in neighborhoods2">[[opt]]</md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container>
+                <md-select ng-model="someModel" placeholder="Visibility">
+                    <md-option ng-value="opt" ng-repeat="opt in neighborhoods2">[[opt]]</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <md-virtual-repeat-container id="vertical-container">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>
+                        <md-checkbox title="Select all Pictures" ng-model="isChecked" aria-label="Select All"></md-checkbox>
+                    </th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Width</th>
+                    <th>Height</th>
+                    <th>Caption</th>
+                    <th>Description</th>
+                    <th>MimeType</th>
+                    <th>Size</th>
+                    <th>Uploader</th>
+                    <th>Uploaded At</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{range .Pictures}}
+                <tr>
+                    <td>
+                        <md-checkbox title="Select {{.Name}}" aria-label="Select"></md-checkbox>
+                    </td>
+                    <td>{{.ID}}</td>
+                    <td>
+                        <p>
+                            <a href="/dashboard/pictures/{{.ID}}/?task=edit&sig={{$.Signature}}" title="{{.Name}}">{{.Name}}</a>
+                        </p>
+                        <p>
+                            <img width="80" height="80" title="{{.Caption}}" src="{{.Url}}" alt="{{.Description}}">
+                        </p>
+                        <p>
+                            <a href="/dashboard/pictures/{{.ID}}/?task=edit&sig={{$.Signature}}" title="Edit {{.Name}}">Edit</a> |
+                            <a href="/dashboard/pictures/{{.ID}}/?task=trash&sig={{$.Signature}}" title="Trash {{.Name}}">Trash</a> |
+                            <a target="_blank" href="{{.Url}}" title="View {{.Name}}">View</a>
+                        </p>
+                    </td>
+                    <td>{{.Width}}</td>
+                    <td>{{.Height}}</td>
+                    <td>{{.Caption}}</td>
+                    <td>{{.Description}}</td>
+                    <td>{{.MimeType}}</td>
+                    <td>{{.Size}}</td>
+                    <td>{{.Uploader.Name}}</td>
+                    <td>{{.UploadedAt}}</td>
+                </tr>
+                {{end}}
+                </tbody>
+            </table>
+        </md-virtual-repeat-container>
+    </div>
+</div>
+
+{{template "footer"}}

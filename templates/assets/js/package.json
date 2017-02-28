@@ -1,0 +1,42 @@
+{
+  "name": "cms",
+  "version": "1.0.0",
+  "description": "The CMS for Contetto",
+  "repository": "https://gitlab.com/contetto-source/cms",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify app.js -d -o app.bundle.js -v",
+    "watch": "watchify app.js -d -o app.bundle.js -v"
+  },
+  "author": "Sujon Miya",
+  "license": "ISC",
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.0.0-beta.12",
+    "browserify": "^13.1.1",
+    "source-map-loader": "^0.1.5",
+    "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "@types/angular": "^1.5.20",
+    "@types/angular-animate": "^1.5.6",
+    "@types/angular-cookies": "^1.4.3",
+    "@types/angular-material": "^1.1.42",
+    "@types/angular-sanitize": "^1.3.4",
+    "@types/lodash": "^4.14.43",
+    "@types/ng-file-upload": "^11.1.32",
+    "@types/selectize": "^0.12.28",
+    "angular": "^1.6.0",
+    "angular-animate": "^1.6.0",
+    "angular-aria": "^1.6.0",
+    "angular-cookies": "^1.6.0",
+    "angular-material": "^1.1.1",
+    "angular-material-icons": "^0.7.1",
+    "angular-sanitize": "^1.6.0",
+    "dropify": "^0.2.1",
+    "es5-shim": "^4.5.9",
+    "lodash": "^4.17.2",
+    "ng-file-upload": "^12.2.13",
+    "selectize": "^0.12.4"
+  }
+}

@@ -1,0 +1,15 @@
+{{template "header"}}
+{{template "sidebar" .CurrentUser}}
+
+<div layout-padding flex>
+    <h1>Edit Article</h1>
+    <hr/>
+    <toaster-container></toaster-container>
+    <div ng-controller="ArticleEditCtrl as vm" ng-cloak layout-wrap>
+        <div layout="row">
+            {{template "article" .}}
+        </div>
+    </div>
+</div>
+
+{{template "footer"}}

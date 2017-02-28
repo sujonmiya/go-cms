@@ -1,0 +1,83 @@
+{{template "header"}}
+{{template "sidebar" .CurrentUser}}
+
+<md-content flex layout-padding>
+    <h1>Categories</h1>
+    <hr/>
+
+    <div ng-controller="CategoriesCtrl" ng-cloak>
+        <md-input-container>
+            <label>Name</label>
+            <input type="text" />
+        </md-input-container>
+
+        <md-input-container>
+            <label>Description</label>
+            <input type="text"/>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Parent</label>
+            <md-select ng-model="parent">
+                <md-option><em>None</em></md-option>
+                {{range .Categories}}
+                <md-option>{{.Name}}</md-option>
+                {{end}}
+            </md-select>
+        </md-input-container>
+
+        <md-button class="md-raised" ng-click="newCategory($event)">Add New Category</md-button>
+
+        <md-virtual-repeat-container id="vertical-container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            <md-checkbox title="Select all Categories" ng-model="isChecked" aria-label="Select All"></md-checkbox>
+                        </th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Parent</th>
+                        <th>Articles</th>
+                        <th>Author</th>
+                        <th>Last Edited</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Categories}}
+                    <tr>
+                        <td>
+                            <md-checkbox title="Select {{.Name}}" aria-label="Select"></md-checkbox>
+                        </td>
+                        <td>{{.ID}}</td>
+                        <td>
+                            <p>
+                                <a href="/dashboard/categories/{{.ID}}/?task=edit&sig={{$.Signature}}" title="{{.Name}}">
+                                    {{.Name}}
+                                </a><br/>
+                                <small><em>Alias: {{.Slug}}</em></small>
+                            </p>
+                            <p></p>
+                            <p>
+                                <a href="/dashboard/categories/{{.ID}}/?task=edit&sig={{$.Signature}}" title="Edit {{.Name}}">Edit</a> |
+                                <a href="/dashboard/categories/{{.ID}}/?task=delete&sig={{$.Signature}}" title="Trash {{.Name}}">Trash</a> |
+                                <a target="_blank" href="/categories/{{.Slug}}" title="View {{.Name}}">View</a>
+                            </p>
+                        </td>
+                        <td class="description">{{.Description}}</td>
+                        <td>{{.Parent.Name}}</td>
+                        <td><small><em>{{.NumArticles}}</em></small></td>
+                        <td>{{.AuthorName}}</td>
+                        <td>{{.LastEditorName}}<br/><small>{{.UpdatedAt}}</small></td>
+                        <td>{{.CreatedAt}}</td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </md-virtual-repeat-container>
+    </div>
+</md-content>
+
+{{template "footer"}}

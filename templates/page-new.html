@@ -1,0 +1,21 @@
+{{template "header"}}
+{{template "sidebar" .CurrentUser}}
+
+<div layout-padding flex>
+    <h1>New Page</h1>
+    <hr/>
+
+    <div ng-controller="PageCtrl" ng-cloak layout-wrap>
+        <div layout="row">
+            {{template "page" .}}
+
+            <div flex layout-align="end start">
+                <md-input-container>
+                    <md-button ng-click="save(page)" class="md-primary md-raised">Save</md-button>
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{template "footer"}}

@@ -1,0 +1,123 @@
+{{template "header"}}
+{{template "sidebar" .CurrentUser}}
+
+<div layout-padding flex>
+    <h1>Articles</h1>
+    <div class="breadcrumbs">
+        <a href="/dashboard">Dashboard</a><span>/</span><a href="/dashboard/articles">Articles</a>
+        <!--<li class="active">Contact Page</li>-->
+    </div>
+    <hr/>
+
+    <div ng-controller="ArticleCtrl as vm" ng-cloak layout-wrap>
+        <md-button class="md-raised" ng-href="?new">New Article</md-button>
+        <md-input-container>
+            <md-select ng-model="someModel" placeholder="Categories">
+                <md-option ng-value="opt" ng-repeat="opt in neighborhoods2">[[opt]]</md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container>
+            <md-select ng-model="someModel" placeholder="Tags">
+                <md-option ng-value="opt" ng-repeat="opt in neighborhoods2">[[opt]]</md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container>
+            <md-select ng-model="someModel" placeholder="Author">
+                <md-option ng-value="opt" ng-repeat="opt in neighborhoods2">[[opt]]</md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container>
+            <md-select ng-model="someModel" placeholder="Editor">
+                <md-option ng-value="opt" ng-repeat="opt in neighborhoods2">[[opt]]</md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container>
+            <md-select ng-model="filter.status" placeholder="Select a Status">
+                <md-option><em>None</em></md-option>
+                <md-option value="Draft">Draft</md-option>
+                <md-option value="Published">Published</md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-button style="float: right;" class="md-raised">Filter</md-button>
+
+        <md-virtual-repeat-container id="vertical-container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            <md-checkbox title="Select all Articles" ng-model="isChecked" aria-label="Select All"></md-checkbox>
+                        </th>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Author</th>
+                        <th>Last Edited</th>
+                        <th>Status</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Articles}}
+                    <tr>
+                        <td>
+                            <md-checkbox title="Select {{.Title}}" aria-label="Select"></md-checkbox>
+                        </td>
+                        <td>{{.ID}}</td>
+                        <td>
+                            <p>
+                                <a href="/dashboard/articles/{{.ID}}/?task=edit&sig={{$.Signature}}" title="Edit {{.Title}}">{{.Title}}</a><br/>
+                                <small><em>Alias: {{.Slug}}</em></small>
+                            </p>
+                            <p>
+                                <small>
+                                    Categories:
+                                    <span>
+                                    {{range $i, $e := .Categories}}
+                                        {{if $i}}, {{end}}<a title="Edit {{.Name}}" href="/dashboard/articles/?task=filter&category={{.ID}}">{{.Name}}</a>
+                                    {{end}}
+                                    </span>
+                                </small>
+                                <br/>
+                                <small>
+                                    Tags:
+                                    <span>
+                                        {{range $i, $e := .Taxonomies}}
+                                            {{if $i}}, {{end}}<a title="Edit {{.Name}}" href="/dashboard/articles/?task=filter&taxonomy={{.ID}}">{{.Name}}</a>
+                                        {{end}}
+                                    </span>
+                                </small>
+                            </p>
+                            <p>
+                                <a href="/dashboard/articles/{{.ID}}/?task=edit&sig={{$.Signature}}" title="Edit {{.Title}}">Edit</a> |
+                                <a href="/dashboard/articles/{{.ID}}/?task=trash&sig={{$.Signature}}" title="Trash {{.Title}}">Trash</a> |
+                                <a target="_blank" href="/articles/{{.Slug}}" title="View {{.Title}}">View</a>
+                            </p>
+                        </td>
+                        <td style="max-width: 500px;">
+                            {{.Content}}
+                        </td>
+                        <td>
+                            <a href="/dashboard/articles/?task=filter&author={{.Author.ID}}">{{.Author.FullName}}</a>
+                        </td>
+                        <td>
+                            <a href="/dashboard/articles/?task=filter&editor={{.Editor.ID}}">{{.Editor.FullName}}</a>
+                            <br/><small>{{.UpdatedAt}}</small>
+                        </td>
+                        <td>
+                            <a href="/dashboard/articles/?task=filter&status={{.Status}}">{{.Status}}</a>
+                        </td>
+                        <td>{{.CreatedAt}}</td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </md-virtual-repeat-container>
+    </div>
+</div>
+
+{{template "footer"}}

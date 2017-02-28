@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es5",
+    "sourceMap": true,
+    "lib": ["es2015", "dom"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "typeRoots" : ["node_modules/@types", "node_modules/@types/angular", "node_modules/@types/jquery"],
+    "outDir": "./dist"
+  },
+  "compileOnSave": true,
+  "files": [
+    "./src/app.ts"
+  ]
+}

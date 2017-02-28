@@ -1,0 +1,55 @@
+#vertical-container {
+    height: 627px;
+    width: 100%; }
+
+md-dialog {
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    -ms-border-radius: 0;
+}
+
+md-card md-card-content h2 {
+    color: darkgray;
+}
+
+md-card md-card-content p {
+    color: gray;
+}
+
+md-sidenav {
+    overflow: hidden;
+}
+
+md-checkbox {
+    margin-bottom: 0;
+}
+
+.table td.description {
+    max-width: 500px;
+}
+
+md-list-item > md-checkbox, md-list-item .md-list-item-inner > md-checkbox {
+    margin-top: 0;
+}
+
+.md-datepicker-input-container {
+    width: 75%;
+}
+
+md-card md-card-content md-input-container {
+    width: 100%;
+}
+
+.breadcrumbs {
+
+}
+
+.breadcrumbs span {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.breadcrumbs a {
+
+}

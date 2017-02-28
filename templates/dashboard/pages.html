@@ -1,0 +1,87 @@
+{{template "header"}}
+{{template "sidebar" .CurrentUser}}
+
+<div layout-padding flex>
+    <h1>Pages</h1>
+    <hr/>
+
+    <div ng-controller="PagesCtrl as ctrl" ng-cloak layout-wrap>
+        <md-button class="md-raised" ng-href="?new">New Page</md-button>
+        <div layout="row">
+            <md-input-container>
+                <md-select ng-model="filter.Author.FullName" placeholder="Author">
+                    <md-option ng-value="author" ng-repeat="author in authors">[[author]]</md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container>
+                <md-select ng-model="filter.Editor.FullName" placeholder="Editor">
+                    <md-option ng-value="editor" ng-repeat="editor in editors">[[editor]]</md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container>
+                <md-select ng-model="filter.Status" placeholder="Status">
+                    <md-option ng-value="status" ng-repeat="status in statuses">[[status]]</md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container>
+                <md-select ng-model="filter.Visibility" placeholder="Visibility">
+                    <md-option ng-value="visibility" ng-repeat="visibility in visibilities">[[visibility]]</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <md-virtual-repeat-container id="vertical-container">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>
+                        <md-checkbox title="Select all Pages" ng-model="isChecked" aria-label="Select All"></md-checkbox>
+                    </th>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Template</th>
+                    <th>Author</th>
+                    <th>Last Edited</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{range .Pages}}
+                <tr>
+                    <td>
+                        <md-checkbox title="Select {{.Title}}" aria-label="Select"></md-checkbox>
+                    </td>
+                    <td>{{.ID}}</td>
+                    <td>
+                        <a href="/dashboard/pages/{{.ID}}/?task=edit&sig={{$.Signature}}" title="{{.Title}}" target="_blank">
+                            {{.Title}}
+                        </a><br/>
+                        <small><em>Alias: {{.Slug}}</em></small>
+                        <p></p>
+                        <p>
+                            <a href="/dashboard/pages/{{.ID}}/?task=edit&sig={{$.Signature}}" title="Edit {{.Title}}">Edit</a> |
+                            <a href="/dashboard/pages/{{.ID}}/?task=trash&sig={{$.Signature}}" title="Trash {{.Title}}">Trash</a> |
+                            <a target="_blank" href="/pages/{{.Slug}}" title="View {{.Title}}">View</a>
+                        </p>
+                    </td>
+                    <td style="max-width: 500px">
+                        {{.Content}}
+                    </td>
+                    <td>{{.Template}}</td>
+                    <td>{{.AuthorName}}</td>
+                    <td>{{.LastEditorName}}<br/><small>{{.UpdatedAt}}</small></td>
+                    <td>{{.Status}}</td>
+                    <td>{{.CreatedAt}}</td>
+                </tr>
+                {{end}}
+                </tbody>
+            </table>
+        </md-virtual-repeat-container>
+    </div>
+</div>
+
+{{template "footer"}}

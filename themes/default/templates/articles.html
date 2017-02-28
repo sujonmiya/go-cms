@@ -1,0 +1,40 @@
+{{template "header" .}}
+{{template "sidebar" .}}
+
+<md-content flex layout-padding>
+    Articles<br/>
+    {{range .Articles}}
+    Title: <a href="/articles/{{.Slug}}" title="{{.Title}}">{{.Title}}</a><br/>
+    Content: {{.Content}}<br/>
+    Excerpt: {{.Excerpt}}<br/><br/>
+
+    FeaturedImage:<br/>
+    <img src="{{.FeaturedImage.Url}}" title="{{.FeaturedImage.Description}}" alt="{{.FeaturedImage.Description}}" /><br/>
+    Caption: {{.FeaturedImage.Caption}}<br/><br/>
+
+    Author<br/>
+    FullName: {{.Author.FullName}}<br/>
+    NickName: {{.Author.NickName}}<br/>
+    Website: {{.Author.Website}}<br/>
+    Bio: {{.Author.Bio}}<br/>
+    ProfilePictureUrl: {{.Author.ProfilePictureUrl}}<br/><br/>
+
+    Categories<br/>
+    {{range .Categories}}
+    Name:<a href="/categories/{{.Slug}}" title="{{.Name}}">{{.Name}}</a>
+    {{end}}
+    <br/><br/>
+
+    Taxonomies<br/>
+    {{range .Taxonomies}}
+        Name:<a href="/taxonomies/{{.Slug}}" title="{{.Name}}">{{.Name}}</a>
+    {{end}}
+    <br/><br/>
+
+    Status: {{.Status}}<br/>
+    UpdatedAt: {{.UpdatedAt}}<br/>
+    <hr/>
+    {{end}}
+</md-content>
+
+{{template "footer"}}

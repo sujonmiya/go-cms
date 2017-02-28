@@ -1,0 +1,89 @@
+{{define "page"}}
+
+<div style="float: left;">
+    <md-input-container style="width: 100%;">
+        <label>Title</label>
+        <input type="text" value="{{.Page.Title}}"/>
+        <br/>
+        <small><em>Alias: {{.Page.Slug}}</em></small>
+    </md-input-container>
+
+    <label>Content</label>
+    <div layout="row">
+        <div>
+            <textarea flex name="content" id="editor2" rows="10" cols="80">{{.Page.Content}}</textarea>
+            <script type="text/javascript">
+                CKEDITOR.replace('editor2', {
+                    width: '750px',
+                    height: 350
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+<div style="float: right;">
+    <div style="width: 350px;">
+        <md-card>
+            <md-card-header>
+                <md-card-avatar>
+                    <md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-title">Status</span>
+                    <span class="md-subhead">subhead</span>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-content>
+                <md-select flex-gt-sm placeholder="Status" ng-model="article.Status">
+                    {{range .Statuses}}
+                    <md-option value="{{.}}">{{.}}</md-option>
+                    {{end}}
+                </md-select>
+
+                <md-button style="margin-right: 0; float: right;" class="md-primary md-raised">Update</md-button>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <div style="width: 350px;">
+        <md-card>
+            <md-card-header>
+                <md-card-avatar>
+                    <md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-title">Template</span>
+                    <span class="md-subhead">subhead</span>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-content>
+                <md-select placeholder="Template" ng-model="page.Template">
+                    <md-option value="Default">Default</md-option>
+                    {{range .Templates}}
+                    <md-option value="{{.}}">{{.}}</md-option>
+                    {{end}}
+                </md-select>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <div style="width: 350px;">
+        <md-card>
+            <md-card-header>
+                <md-card-avatar>
+                    <md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-title">Author</span>
+                    <span class="md-subhead">subhead</span>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-content>
+                <p>{{.Page.AuthorName}} <small><em>authored {{.Page.CreatedAt}}</em></small></p>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>
+
+{{end}}

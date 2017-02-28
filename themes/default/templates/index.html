@@ -1,0 +1,26 @@
+{{template "header" .}}
+{{template "sidebar" .}}
+
+<md-content flex layout-padding>
+    Articles<br/>
+    {{range .Articles}}
+    Title:<a href="/articles/{{.Slug}}" title="{{.Title}}">{{.Title}}</a><br/>
+    Content:{{.Content}}<br/>
+    UpdatedAt:{{.UpdatedAt}}<br/><br/>
+
+    Categories<br/>
+    {{range .Categories}}
+    Name:<a href="/category/{{.Slug}}" title="{{.Name}}">{{.Name}}</a><br/>
+    Description:{{.Description}}<br/><br/>
+    {{end}}
+
+    <!--Tags<br/><br/>
+    {{/*range .Tags}}
+        Name:<a href="/tags/{{.Slug}}" title="{{.Name}}">{{.Name}}</a><br/><br/>
+        Description:{{.Description}}<br/><br/>
+    {{end*/}}-->
+    <hr/>
+    {{end}}
+</md-content>
+
+{{template "footer"}}
